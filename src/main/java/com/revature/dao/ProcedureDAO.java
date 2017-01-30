@@ -16,21 +16,22 @@ public class ProcedureDAO {
 	JdbcTemplate jdbcTemplate = ConnectionUtil.getJdbcTemplate();
 
 	public String placeOrder(String seatName, String itemNameList, String itemQuantityList, String message) {
+		final String MSG = "out_msg";
 
 		SimpleJdbcCall call = new SimpleJdbcCall(jdbcTemplate);
 		call.withProcedureName("PR_IS_VALID_INPUT");
 		call.declareParameters(new SqlParameter("in_seat_name", Types.VARCHAR),
 				new SqlParameter("in_item_name", Types.VARCHAR), new SqlParameter("in_item_qty", Types.VARCHAR),
-				new SqlOutParameter("out_msg", Types.VARCHAR));
+				new SqlOutParameter(MSG, Types.VARCHAR));
 		call.setAccessCallParameterMetaData(false);
 
 		MapSqlParameterSource in = new MapSqlParameterSource().addValue("in_seat_name", seatName)
 				.addValue("in_item_name", itemNameList).addValue("in_item_qty", itemQuantityList)
-				.addValue("out_msg", message);
+				.addValue(MSG, message);
 
 		Map<String, Object> execute = call.execute(in);
 
-		return (String) execute.get("out_msg");
+		return (String) execute.get(MSG);
 
 	}
 
