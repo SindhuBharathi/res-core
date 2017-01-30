@@ -18,17 +18,13 @@ public class OrderInfoDAO {
 
 	public List<OrderInfo> list() {
 		String sql = "select id,seat_id,status from order_info";
-		return jdbcTemplate.query(sql, (rs, rowNum) -> {
-			return convert(rs);
-		});
+		return jdbcTemplate.query(sql, (rs, rowNum) -> convert(rs));
 	}
 
 	public OrderInfo listById(int id) {
 		String sql = "select id,seat_id,status from order_info where id=?";
 		Object[] params = { id };
-		return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> {
-			return convert(rs);
-		});
+		return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> convert(rs));
 	}
 
 	static OrderInfo convert(final ResultSet rs) throws SQLException {

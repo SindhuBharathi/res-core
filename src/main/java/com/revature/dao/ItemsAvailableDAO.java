@@ -17,7 +17,7 @@ public class ItemsAvailableDAO {
 
 	JdbcTemplate jdbcTemplate = ConnectionUtil.getJdbcTemplate();
 	Logger logger = Logger.getLogger(ItemsAvailableDAO.class.getName());
-	final String msg = "No. of rows changed ";
+	static final String msg = "No. of rows changed ";
 
 	public void save(ItemsAvailable itemsAvailable) {
 		String sql = "insert into items_available(schedule_id,item_id,quantity) values(?,?,?)";
@@ -58,17 +58,13 @@ public class ItemsAvailableDAO {
 
 	public List<ItemsAvailable> list() {
 		String sql = "select id,schedule_id,item_id,quantity from items_available";
-		return jdbcTemplate.query(sql, (rs, rowNum) -> {
-			return convert(rs);
-		});
+		return jdbcTemplate.query(sql, (rs, rowNum) -> convert(rs));
 	}
 
 	public ItemsAvailable listById(int id) {
 		String sql = "select id,schedule_id,item_id,quantity from items_available where id=?";
 		Object[] params = { id };
-		return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> {
-			return convert(rs);
-		});
+		return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> convert(rs));
 
 	}
 

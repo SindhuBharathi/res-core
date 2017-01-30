@@ -15,7 +15,7 @@ public class SeatDAO {
 
 	JdbcTemplate jdbcTemplate = ConnectionUtil.getJdbcTemplate();
 	Logger logger = Logger.getLogger(SeatDAO.class.getName());
-	final String msg = "No. of rows changed ";
+	static final String msg = "No. of rows changed ";
 
 	public void save(Seat seat) {
 		String sql = "insert into seat(name) values(?)";
@@ -39,9 +39,7 @@ public class SeatDAO {
 
 	public List<Seat> list() {
 		String sql = "select id,name,status from seat";
-		return jdbcTemplate.query(sql, (rs, rowNum) -> {
-			return convert(rs);
-		});
+		return jdbcTemplate.query(sql, (rs, rowNum) -> convert(rs));
 	}
 
 	public List<String> findSeatNames() {
@@ -52,17 +50,13 @@ public class SeatDAO {
 	public Seat listByName(String name) {
 		String sql = "select id,name,status from seat where name=?";
 		Object[] params = { name };
-		return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> {
-			return convert(rs);
-		});
+		return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> convert(rs));
 	}
 
 	public Seat listById(int id) {
 		String sql = "select id,name,status from seat where id=?";
 		Object[] params = { id };
-		return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> {
-			return convert(rs);
-		});
+		return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> convert(rs));
 	}
 
 	static Seat convert(final ResultSet rs) throws SQLException {

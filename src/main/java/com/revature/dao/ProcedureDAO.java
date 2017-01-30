@@ -24,11 +24,9 @@ public class ProcedureDAO {
 				new SqlOutParameter("out_msg", Types.VARCHAR));
 		call.setAccessCallParameterMetaData(false);
 
-		MapSqlParameterSource in = new MapSqlParameterSource();
-		in.addValue("in_seat_name", seatName);
-		in.addValue("in_item_name", itemNameList);
-		in.addValue("in_item_qty", itemQuantityList);
-		in.addValue("out_msg", message);
+		MapSqlParameterSource in = new MapSqlParameterSource().addValue("in_seat_name", seatName)
+				.addValue("in_item_name", itemNameList).addValue("in_item_qty", itemQuantityList)
+				.addValue("out_msg", message);
 
 		Map<String, Object> execute = call.execute(in);
 

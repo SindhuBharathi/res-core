@@ -15,7 +15,7 @@ public class ItemDAO {
 
 	JdbcTemplate jdbcTemplate = ConnectionUtil.getJdbcTemplate();
 	Logger logger = Logger.getLogger(ItemDAO.class.getName());
-	final String msg = "No. of rows changed ";
+	static final String msg = "No. of rows changed ";
 
 	public void save(Item item) {
 		String sql = "insert into item(name) values(?)";
@@ -39,9 +39,7 @@ public class ItemDAO {
 
 	public List<Item> list() {
 		String sql = "select id,name from item";
-		return jdbcTemplate.query(sql, (rs, rowNum) -> {
-			return convert(rs);
-		});
+		return jdbcTemplate.query(sql, (rs, rowNum) -> convert(rs));
 	}
 
 	public List<String> findItemNames() {
@@ -52,17 +50,13 @@ public class ItemDAO {
 	public Item listByName(String name) {
 		String sql = "select id,name from item where name=?";
 		Object[] params = { name };
-		return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> {
-			return convert(rs);
-		});
+		return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> convert(rs));
 	}
 
 	public Item listById(int id) {
 		String sql = "select id,name from item where id=?";
 		Object[] params = { id };
-		return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> {
-			return convert(rs);
-		});
+		return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> convert(rs));
 	}
 
 	static Item convert(final ResultSet rs) throws SQLException {

@@ -15,7 +15,7 @@ public class ScheduleDAO {
 
 	JdbcTemplate jdbcTemplate = ConnectionUtil.getJdbcTemplate();
 	Logger logger = Logger.getLogger(ScheduleDAO.class.getName());
-	final String msg = "No. of rows changed ";
+	static final String msg = "No. of rows changed ";
 
 	public void save(Schedule schedule) {
 		String sql = "insert into schedule(name,from_time,to_time) values(?,?,?)";
@@ -54,9 +54,7 @@ public class ScheduleDAO {
 
 	public List<Schedule> list() {
 		String sql = "select id,name,from_time,to_time from schedule";
-		return jdbcTemplate.query(sql, (rs, rowNum) -> {
-			return convert(rs);
-		});
+		return jdbcTemplate.query(sql, (rs, rowNum) -> convert(rs));
 	}
 
 	public List<String> findScheduleNames() {
@@ -67,18 +65,14 @@ public class ScheduleDAO {
 	public Schedule listByName(String name) {
 		String sql = "select id,name,from_time,to_time from schedule where name=?";
 		Object[] params = { name };
-		return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> {
-			return convert(rs);
-		});
+		return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> convert(rs));
 
 	}
 
 	public Schedule listById(int id) {
 		String sql = "select id,name,from_time,to_time from schedule where id=?";
 		Object[] params = { id };
-		return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> {
-			return convert(rs);
-		});
+		return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> convert(rs));
 	}
 
 	static Schedule convert(final ResultSet rs) throws SQLException {

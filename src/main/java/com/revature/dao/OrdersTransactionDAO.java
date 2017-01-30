@@ -17,24 +17,18 @@ public class OrdersTransactionDAO {
 
 	public List<OrdersTransaction> list() {
 		String sql = "select id,order_id,item_id,quantity,time_stamp,status from orders_transaction";
-		return jdbcTemplate.query(sql, (rs, rowNum) -> {
-			return convert(rs);
-		});
+		return jdbcTemplate.query(sql, (rs, rowNum) -> convert(rs));
 	}
 
 	public OrdersTransaction listById(int id) {
 		String sql = "select id,order_id,item_id,quantity,time_stamp,status from orders_transaction where id=?";
 		Object[] params = { id };
-		return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> {
-			return convert(rs);
-		});
+		return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> convert(rs));
 	}
 
 	public List<OrdersTransaction> listByToday() {
 		String sql = "select id,order_id,item_id,quantity,time_stamp,status from orders_transaction where date(time_stamp)=curdate()";
-		return jdbcTemplate.query(sql, (rs, rowNum) -> {
-			return convert(rs);
-		});
+		return jdbcTemplate.query(sql, (rs, rowNum) -> convert(rs));
 
 	}
 
