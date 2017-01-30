@@ -8,32 +8,29 @@ import com.revature.model.Item;
 public class TestItemDAO {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Item item=new Item();
+		Item item = new Item();
 		item.setId(15);
-		item.setName("Special Meals");
-		
-		ItemDAO itemDAO=new ItemDAO();
+		item.setName("Meals");
 
-		itemDAO.save(item);
-//		itemDAO.update(item);
-//		itemDAO.delete(15);
-		
-/*		List<Item> list=itemDAO.list();
-		for(Item i:list)
-		{
+		ItemDAO itemDAO = new ItemDAO();
+
+		// itemDAO.save(item);
+		// itemDAO.update(item);
+		// itemDAO.delete(15);
+
+		List<Item> list = itemDAO.list();
+		for (Item i : list) {
 			System.out.println(i);
 		}
-	*/	
-		item=itemDAO.listByName("Dos");
+
+		item = itemDAO.listByName("Dosa");
 		System.out.println(item);
-		
-		item=itemDAO.listById(14);
+
+		item = itemDAO.listById(14);
 		System.out.println(item);
-		
+
 		List<String> itemNames = itemDAO.findItemNames();
-		for (String itemName : itemNames) 
-		{
+		for (String itemName : itemNames) {
 			System.out.println(itemName);
 		}
 

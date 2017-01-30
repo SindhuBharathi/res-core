@@ -11,7 +11,6 @@ import com.revature.model.Schedule;
 public class TestItemsAvailableDAO {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		ItemsAvailable itemsAvailable=new ItemsAvailable();
 		
 		Schedule schedule=new Schedule();

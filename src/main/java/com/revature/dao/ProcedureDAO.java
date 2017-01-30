@@ -32,7 +32,7 @@ public class ProcedureDAO {
 
 		Map<String, Object> execute = call.execute(in);
 
-		return ((String) execute.get("out_msg"));
+		return (String) execute.get("out_msg");
 
 	}
 
@@ -48,7 +48,7 @@ public class ProcedureDAO {
 
 		Map<String, Object> execute = call.execute(in);
 
-		return ((String) execute.get("param_msg"));
+		return (String) execute.get("param_msg");
 
 	}
 
