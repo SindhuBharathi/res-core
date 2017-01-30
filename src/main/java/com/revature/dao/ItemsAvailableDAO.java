@@ -23,35 +23,35 @@ public class ItemsAvailableDAO {
 		Object[] params = { itemsAvailable.getScheduleId().getId(), itemsAvailable.getItemId().getId(),
 				itemsAvailable.getQuantity() };
 		int rows = jdbcTemplate.update(sql, params);
-		logger.log(Level.INFO, "No. of row(s) inserted : " + rows);
+		logger.log(Level.INFO, "No. of row(s) inserted : ", rows);
 	}
 
 	public void updateItemId(ItemsAvailable itemsAvailable) {
 		String sql = "update items_available set item_id=? where id=?";
 		Object[] params = { itemsAvailable.getItemId().getId(), itemsAvailable.getId() };
 		int rows = jdbcTemplate.update(sql, params);
-		logger.log(Level.INFO, "No. of row(s) updated : " + rows);
+		logger.log(Level.INFO, "No. of row(s) updated : ", rows);
 	}
 
 	public void updateScheduleId(ItemsAvailable itemsAvailable) {
 		String sql = "update items_available set schedule_id=? where id=?";
 		Object[] params = { itemsAvailable.getScheduleId().getId(), itemsAvailable.getId() };
 		int rows = jdbcTemplate.update(sql, params);
-		logger.log(Level.INFO, "No. of row(s) updated : " + rows);
+		logger.log(Level.INFO, "No. of row(s) updated : ", rows);
 	}
 
 	public void updateQuantity(ItemsAvailable itemsAvailable) {
 		String sql = "update items_available set quantity=? where id=?";
 		Object[] params = { itemsAvailable.getQuantity(), itemsAvailable.getId() };
 		int rows = jdbcTemplate.update(sql, params);
-		logger.log(Level.INFO, "No. of row(s) updated : " + rows);
+		logger.log(Level.INFO, "No. of row(s) updated : ", rows);
 
 	}
 
 	public void delete(int id) {
 		String sql = "delete from items_available where id=?";
 		int rows = jdbcTemplate.update(sql, id);
-		logger.log(Level.INFO, "No. of row(s) updated : " + rows);
+		logger.log(Level.INFO, "No. of row(s) updated : ", rows);
 
 	}
 

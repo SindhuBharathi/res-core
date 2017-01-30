@@ -20,20 +20,20 @@ public class ItemDAO {
 		String sql = "insert into item(name) values(?)";
 		Object[] params = { item.getName() };
 		int rows = jdbcTemplate.update(sql, params);
-		logger.log(Level.INFO, "No. of row(s) inserted : " + rows);
+		logger.log(Level.INFO, "No. of row(s) inserted : ", rows);
 	}
 
 	public void update(Item item) {
 		String sql = "update item set name=? where id=?";
 		Object[] params = { item.getName(), item.getId() };
 		int rows = jdbcTemplate.update(sql, params);
-		logger.log(Level.INFO, "No. of row(s) updated : " + rows);
+		logger.log(Level.INFO, "No. of row(s) updated : ", rows);
 	}
 
 	public void delete(int id) {
 		String sql = "delete from item where id=?";
 		int rows = jdbcTemplate.update(sql, id);
-		logger.log(Level.INFO, "No. of row(s) deleted : " + rows);
+		logger.log(Level.INFO, "No. of row(s) deleted : ", rows);
 	}
 
 	public List<Item> list() {
