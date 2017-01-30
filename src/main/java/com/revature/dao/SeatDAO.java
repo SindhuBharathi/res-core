@@ -15,25 +15,26 @@ public class SeatDAO {
 
 	JdbcTemplate jdbcTemplate = ConnectionUtil.getJdbcTemplate();
 	Logger logger = Logger.getLogger(SeatDAO.class.getName());
+	final String msg = "No. of rows changed ";
 
 	public void save(Seat seat) {
 		String sql = "insert into seat(name) values(?)";
 		Object[] params = { seat.getName() };
 		int rows = jdbcTemplate.update(sql, params);
-		logger.log(Level.INFO, "No. of row(s) inserted : ", rows);
+		logger.log(Level.INFO, msg, rows);
 	}
 
 	public void update(Seat seat) {
 		String sql = "update seat set name=? where id=?";
 		Object[] params = { seat.getName(), seat.getId() };
 		int rows = jdbcTemplate.update(sql, params);
-		logger.log(Level.INFO, "No. of row(s) updated : ", rows);
+		logger.log(Level.INFO, msg, rows);
 	}
 
 	public void delete(int id) {
 		String sql = "delete from seat where id=?";
 		int rows = jdbcTemplate.update(sql, id);
-		logger.log(Level.INFO, "No. of row(s) deleted : ", rows);
+		logger.log(Level.INFO, msg, rows);
 	}
 
 	public List<Seat> list() {

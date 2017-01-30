@@ -15,12 +15,13 @@ public class ScheduleDAO {
 
 	JdbcTemplate jdbcTemplate = ConnectionUtil.getJdbcTemplate();
 	Logger logger = Logger.getLogger(ScheduleDAO.class.getName());
+	final String msg = "No. of rows changed ";
 
 	public void save(Schedule schedule) {
 		String sql = "insert into schedule(name,from_time,to_time) values(?,?,?)";
 		Object[] params = { schedule.getName(), schedule.getFromTime(), schedule.getToTime() };
 		int rows = jdbcTemplate.update(sql, params);
-		logger.log(Level.INFO, "No. of row(s) inserted : ", rows);
+		logger.log(Level.INFO, msg, rows);
 
 	}
 
@@ -28,27 +29,27 @@ public class ScheduleDAO {
 		String sql = "update schedule set name=? where id=?";
 		Object[] params = { schedule.getName(), schedule.getId() };
 		int rows = jdbcTemplate.update(sql, params);
-		logger.log(Level.INFO, "No. of row(s) updated : ", rows);
+		logger.log(Level.INFO, msg, rows);
 	}
 
 	public void updateFromTime(Schedule schedule) {
 		String sql = "update schedule set from_time=? where id=?";
 		Object[] params = { schedule.getFromTime(), schedule.getId() };
 		int rows = jdbcTemplate.update(sql, params);
-		logger.log(Level.INFO, "No. of row(s) updated : ", rows);
+		logger.log(Level.INFO, msg, rows);
 	}
 
 	public void updateToTime(Schedule schedule) {
 		String sql = "update schedule set to_time=? where id=?";
 		Object[] params = { schedule.getToTime(), schedule.getId() };
 		int rows = jdbcTemplate.update(sql, params);
-		logger.log(Level.INFO, "No. of row(s) updated : ", rows);
+		logger.log(Level.INFO, msg, rows);
 	}
 
 	public void delete(int id) {
 		String sql = "delete from schedule where id=?";
 		int rows = jdbcTemplate.update(sql, id);
-		logger.log(Level.INFO, "No. of row(s) deleted : ", rows);
+		logger.log(Level.INFO, msg, rows);
 	}
 
 	public List<Schedule> list() {
