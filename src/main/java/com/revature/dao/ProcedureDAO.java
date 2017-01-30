@@ -11,13 +11,11 @@ import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 
 import com.revature.util.ConnectionUtil;
 
-public class ProcedureDAO 
-{
-	
+public class ProcedureDAO {
+
 	JdbcTemplate jdbcTemplate = ConnectionUtil.getJdbcTemplate();
-	
-	public String placeOrder(String seatName, String itemNameList, String itemQuantityList, String message) 
-	{
+
+	public String placeOrder(String seatName, String itemNameList, String itemQuantityList, String message) {
 
 		SimpleJdbcCall call = new SimpleJdbcCall(jdbcTemplate);
 		call.withProcedureName("PR_IS_VALID_INPUT");
@@ -34,26 +32,24 @@ public class ProcedureDAO
 
 		Map<String, Object> execute = call.execute(in);
 
-		String status = (String) execute.get("out_msg");
-		return status;
+		return ((String) execute.get("out_msg"));
 
 	}
-	
-	public String cancelOrder(int orderId, String message)
-	{
+
+	public String cancelOrder(int orderId, String message) {
 		SimpleJdbcCall call = new SimpleJdbcCall(jdbcTemplate);
 		call.withProcedureName("PR_CANCEL_ORDER");
 		call.declareParameters(new SqlParameter("param_order_id", Types.INTEGER),
 				new SqlOutParameter("param_msg", Types.VARCHAR));
 		call.setAccessCallParameterMetaData(false);
 
-		MapSqlParameterSource in = new MapSqlParameterSource().addValue("param_order_id", orderId).addValue("param_msg", message);
+		MapSqlParameterSource in = new MapSqlParameterSource().addValue("param_order_id", orderId).addValue("param_msg",
+				message);
 
 		Map<String, Object> execute = call.execute(in);
-		
-		String status=(String) execute.get("param_msg");
-		return status;
-	
+
+		return ((String) execute.get("param_msg"));
+
 	}
 
 }
