@@ -10,13 +10,14 @@ import com.revature.model.Item;
 
 public class ItemValidator {
 	Logger logger = Logger.getLogger(ItemDAO.class.getName());
+	static final String MSG = "Exception: ";
 
 	public void validateSave(Item item) {
 		if ("".equals(item.getName())) {
 			try {
 				throw new NullItemFoundException("Item name cannot be null");
 			} catch (NullItemFoundException e) {
-				logger.log(Level.SEVERE, "Exception: " + e);
+				logger.log(Level.SEVERE, MSG + e);
 			}
 		}
 	}
@@ -26,7 +27,7 @@ public class ItemValidator {
 			try {
 				throw new NullItemFoundException("Item name cannot be null");
 			} catch (NullItemFoundException e) {
-				logger.log(Level.SEVERE, "Exception: " + e);
+				logger.log(Level.SEVERE, MSG + e);
 			}
 		}
 	}
@@ -36,7 +37,7 @@ public class ItemValidator {
 			try {
 				throw new NegativeIdFoundException("ID cannot be negative");
 			} catch (NegativeIdFoundException e) {
-				logger.log(Level.SEVERE, "Exception: " + e);
+				logger.log(Level.SEVERE, MSG + e);
 			}
 		}
 	}

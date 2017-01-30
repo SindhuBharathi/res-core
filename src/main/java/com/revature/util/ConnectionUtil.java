@@ -4,6 +4,10 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class ConnectionUtil {
+	private ConnectionUtil() {
+		throw new IllegalAccessError("Utility class");
+	}
+
 	public static BasicDataSource dataSource() {
 
 		BasicDataSource ds = new BasicDataSource();
