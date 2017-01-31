@@ -10,12 +10,22 @@ public class TestItemService {
 
 		Item item = new Item();
 
-//		item.setId(-1);
+		// item.setId(-1);
 		item.setName("");
 		try {
 			itemService.saveService(item);
 		} catch (ItemServiceException e) {
 			e.printStackTrace();
- 		}
+		}
+		try {
+			itemService.updateService(item);
+		} catch (ItemServiceException e) {
+			e.printStackTrace();
+		}
+		try {
+			itemService.deleteService(-2);
+		} catch (ItemServiceException e) {
+			e.printStackTrace();
+		}
 	}
 }
