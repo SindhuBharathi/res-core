@@ -1,44 +1,26 @@
 package com.revature.validator;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import com.revature.dao.ItemDAO;
-import com.revature.exception.NegativeIdFoundException;
-import com.revature.exception.NullItemFoundException;
+import com.revature.exception.NegativeValueFoundException;
+import com.revature.exception.NullValueFoundException;
 import com.revature.model.Item;
 
 public class ItemValidator {
-	Logger logger = Logger.getLogger(ItemDAO.class.getName());
-	static final String MSG = "Exception: ";
 
-	public void validateSave(Item item) {
+	public void validateSave(Item item) throws NullValueFoundException {
 		if ("".equals(item.getName())) {
-			try {
-				throw new NullItemFoundException("Item name cannot be null");
-			} catch (NullItemFoundException e) {
-				logger.log(Level.SEVERE, MSG + e);
-			}
+			throw new NullValueFoundException("Item name cannot be null");
 		}
 	}
 
-	public void validateUpdate(Item item) {
+	public void validateUpdate(Item item) throws NullValueFoundException {
 		if ("".equals(item.getName())) {
-			try {
-				throw new NullItemFoundException("Item name cannot be null");
-			} catch (NullItemFoundException e) {
-				logger.log(Level.SEVERE, MSG + e);
-			}
+			throw new NullValueFoundException("Item name cannot be null");
 		}
 	}
 
-	public void validateDelete(int id) {
+	public void validateDelete(int id) throws NegativeValueFoundException {
 		if (id < 0) {
-			try {
-				throw new NegativeIdFoundException("ID cannot be negative");
-			} catch (NegativeIdFoundException e) {
-				logger.log(Level.SEVERE, MSG + e);
-			}
+			throw new NegativeValueFoundException("ID cannot be negative");
 		}
 	}
 
