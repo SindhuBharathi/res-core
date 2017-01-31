@@ -16,39 +16,39 @@ public class ProcedureDAO {
 	JdbcTemplate jdbcTemplate = ConnectionUtil.getJdbcTemplate();
 
 	public String placeOrder(String seatName, String itemNameList, String itemQuantityList, String message) {
-		final String LOCAL = "out_msg";
+		final String local = "out_msg";
 
 		SimpleJdbcCall call = new SimpleJdbcCall(jdbcTemplate);
 		call.withProcedureName("PR_IS_VALID_INPUT");
 		call.declareParameters(new SqlParameter("in_seat_name", Types.VARCHAR),
 				new SqlParameter("in_item_name", Types.VARCHAR), new SqlParameter("in_item_qty", Types.VARCHAR),
-				new SqlOutParameter(LOCAL, Types.VARCHAR));
+				new SqlOutParameter(local, Types.VARCHAR));
 		call.setAccessCallParameterMetaData(false);
 
 		MapSqlParameterSource in = new MapSqlParameterSource().addValue("in_seat_name", seatName)
 				.addValue("in_item_name", itemNameList).addValue("in_item_qty", itemQuantityList)
-				.addValue(LOCAL, message);
+				.addValue(local, message);
 
 		Map<String, Object> execute = call.execute(in);
 
-		return (String) execute.get(LOCAL);
+		return (String) execute.get(local);
 
 	}
 
 	public String cancelOrder(int orderId, String message) {
-		final String LOCAL = "param_msg";
+		final String local = "param_msg";
 		SimpleJdbcCall call = new SimpleJdbcCall(jdbcTemplate);
 		call.withProcedureName("PR_CANCEL_ORDER");
 		call.declareParameters(new SqlParameter("param_order_id", Types.INTEGER),
-				new SqlOutParameter(LOCAL, Types.VARCHAR));
+				new SqlOutParameter(local, Types.VARCHAR));
 		call.setAccessCallParameterMetaData(false);
 
-		MapSqlParameterSource in = new MapSqlParameterSource().addValue("param_order_id", orderId).addValue(LOCAL,
+		MapSqlParameterSource in = new MapSqlParameterSource().addValue("param_order_id", orderId).addValue(local,
 				message);
 
 		Map<String, Object> execute = call.execute(in);
 
-		return (String) execute.get(LOCAL);
+		return (String) execute.get(local);
 
 	}
 
